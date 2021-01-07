@@ -9,13 +9,13 @@
     <script src="./static/js/vue.js"></script>
     <script src="./static/js/axios.js"></script>
     <link rel="shortcut icon" href="./static/favicon.ico">
-    <title>2018级同学每日数据报送</title>
+    <title>来，测绘！</title>
 </head>
 
 <body class="mdui-theme-primary-teal mdui-theme-accent-teal">
     <div class="mdui-toolbar mdui-color-teal-100" style="margin-bottom:50px">
         <div class="mdui-toolbar-spacer"></div>
-        <span class="mdui-typo-title">2018级同学每日数据报送</span>
+        <span class="mdui-typo-title">来，测绘！</span>
         <div class="mdui-toolbar-spacer"></div>
     </div>
     <div id="app" class="mdui-container">
@@ -92,8 +92,8 @@
             methods: {
                 gei_ye_suan: function () {
                     axios.post(
-                        // 'http://39.106.101.255:7171/gei_ye_suan',
-                        'http://127.0.0.1:7000/gei_ye_suan',
+                        'http://39.106.101.255:7171/gei_ye_suan',
+                        // 'http://127.0.0.1:7000/gei_ye_suan',
                         this.all_od,
                         {
                             headers: {
@@ -101,13 +101,13 @@
                             }
                         }
                     ).then(response => {
-                        this.abd = response.data
+                        this.sbd = response.data['data']
                     })
                 },
                 gei_ye_cass: function () {
                     axios.post(
-                        // 'http://39.106.101.255:7171/gei_ye_suan',
-                        'http://127.0.0.1:7000/gei_ye_cass',
+                        'http://39.106.101.255:7171/gei_ye_suan',
+                        // 'http://127.0.0.1:7000/gei_ye_cass',
                         this.all_od,
                         {
                             headers: {
