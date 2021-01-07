@@ -3,7 +3,9 @@ from flask import Flask, request
 from opks import dfm, kzd, sbd
 from werkzeug.wrappers import Response
 from io import StringIO
+from flask_cors import CORS
 app = Flask(__name__)
+CORS(app)
 
 @app.route("/gei_ye_suan", methods=['POST'])
 def suan():
@@ -64,4 +66,4 @@ def cass():
 
 
 if __name__ == '__main__':
-    app.run(host='127.0.0.1', port=7000)
+    app.run(host='127.0.0.1', port=7171)
