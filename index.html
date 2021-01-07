@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./static/css/mdui.min.css">
+    <script src="./static/js/mdui.min.js"></script>
+    <script src="./static/js/vue.js"></script>
+    <script src="./static/js/axios.js"></script>
+    <link rel="shortcut icon" href="./static/favicon.ico">
+    <title>2018级同学每日数据报送</title>
+</head>
+
+<body class="mdui-theme-primary-teal mdui-theme-accent-teal">
+    <div class="mdui-toolbar mdui-color-teal-100" style="margin-bottom:50px">
+        <div class="mdui-toolbar-spacer"></div>
+        <span class="mdui-typo-title">2018级同学每日数据报送</span>
+        <div class="mdui-toolbar-spacer"></div>
+    </div>
+    <div id="app" class="mdui-container">
+        <div class="mdui-row">
+            <div class="mdui-col-12">
+                <div class="mdui-card" style="padding: 10px;">
+                    <div class="mdui-table">
+                        <table class="mdui-table">
+                            <thead>
+                                <tr>
+                                    <th>碎步点</th>
+                                    <th>所属控制点</th>
+                                    <th>斜距</th>
+                                    <th>平距</th>
+                                    <th>高差</th>
+                                    <th>坐标x</th>
+                                    <th>坐标y</th>
+                                    <th>坐标z</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="item in sbd">
+                                    <td>
+                                        {{ item[0] }}
+                                    </td>
+                                    <td>
+                                        {{ item[1] }}
+                                    </td>
+                                    <td>
+                                        {{ item[2] }}
+                                    </td>
+                                    <td>
+                                        {{ item[3] }}
+                                    </td>
+                                    <td>
+                                        {{ item[4] }}
+                                    </td>
+                                    <td>
+                                        {{ item[5] }}
+                                    </td>
+                                    <td>
+                                        {{ item[6] }}
+                                    </td>
+                                    <td>
+                                        {{ item[7] }}
+                                    </td>
+                                    <td>
+                                        {{ item[8] }}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="mdui-textfield mdui-textfield-floating-label">
+                        <label class="mdui-textfield-label">原始数据</label>
+                        <textarea v-model="all_od" class="mdui-textfield-input"></textarea>
+                    </div>
+                    <div class="mdui-card-actions">
+                        <button @click="gei_ye_suan()" class="mdui-btn mdui-ripple">给爷算</button>
+                        <button @click="gei_ye_cass()" class="mdui-btn mdui-ripple">给爷 CASS</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        app = new Vue({
+            el: "#app",
+            data: {
+                sbd: [],
+                all_od: '',
+            },
+            methods: {
+                gei_ye_suan: function () {
+                    axios.post(
+                        // 'http://39.106.101.255:7171/gei_ye_suan',
+                        'http://127.0.0.1:7000/gei_ye_suan',
+                        this.all_od,
+                        {
+                            headers: {
+                                'Content-Type': 'text/plain'
+                            }
+                        }
+                    ).then(response => {
+                        this.abd = response.data
+                    })
+                },
+                gei_ye_cass: function () {
+                    axios.post(
+                        // 'http://39.106.101.255:7171/gei_ye_suan',
+                        'http://127.0.0.1:7000/gei_ye_cass',
+                        this.all_od,
+                        {
+                            headers: {
+                                'Content-Type': 'text/plain'
+                            }
+                        }
+                    )
+                },
+            },
+        })
+    </script>
+</body>
+
+</html>
