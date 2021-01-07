@@ -111,10 +111,24 @@
                         this.all_od,
                         {
                             headers: {
-                                'Content-Type': 'text/plain'
+                                'Content-Type': 'text/plain',
                             }
                         }
-                    )
+                    ).then(res => {
+                        let data = res.data // 这里后端对文件流做了一层封装，将data指向res.data即可
+                        if (!data) {
+                            return
+                        }
+                        let url = window.URL.createObjectURL(new Blob([data]))
+                        let a = document.createElement('a')
+                        a.style.display = 'none'
+                        a.href = url
+                        a.setAttribute('download', 'cass.dat')
+                        document.body.appendChild(a)
+                        a.click() //执行下载
+                        window.URL.revokeObjectURL(a.href) //释放url
+                        document.body.removeChild(a) //释放标签
+                    })
                 },
             },
         })
